@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
   //Set up observations
   double * temp_obs { new double[nx+1] }; 
   for(auto i{0};i<=nx;i++){
-    temp_obs[i] = 2.0-(i/100.0);
+    temp_obs[i] = 2.0 - ((double)i/(double)nx);
   }
 
   //Create a DCO Tape
@@ -206,6 +206,9 @@ int main(int argc, char* argv[])
       std::cout << "Iteration : " << iters+1 << " : " << "New Loss = " << loss_new << " , Gradient Norm = " << grad_norm << std::endl;
       
       /*Plotting code Starts here.*/
+      fprintf(pipe, "set xlabel 'Location'\n");
+      fprintf(pipe, "set ylabel 'Temperature'\n");
+      fprintf(pipe, "set yrange [0.5:2.5]\n");
       fprintf(pipe,"plot '-' \n");
 
       for(auto i{0} ; i<=nx ; i++){
